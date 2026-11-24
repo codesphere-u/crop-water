@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crop-water"
+version = "0.1.0"
+description = "Zero-dependency FAO-56 Penman-Monteith reference evapotranspiration (ET0), daily root-zone soil-water balance, and solar-pump drip irrigation scheduler for climate-resilient smallholders."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Akandwanaho Ivan Alvin", email = "codesphereinnovationz@gmail.com" },
+]
+keywords = [
+    "fao-56",
+    "penman-monteith",
+    "evapotranspiration",
+    "irrigation",
+    "solar-pumping",
+    "agriculture",
+    "climate-resilience",
+    "water-balance",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.11.0",
+]
+
+[project.scripts]
+crop-water = "crop_water.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/codesphere-u/crop-water"
+Repository = "https://github.com/codesphere-u/crop-water"
+Issues = "https://github.com/codesphere-u/crop-water/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/crop_water"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+packages = ["crop_water"]
